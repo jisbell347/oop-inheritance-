@@ -18,9 +18,37 @@ class Vehicle {
 	}
 }
 /*
+ * trait that can be used by multiple classes
+ */
+
+trait InternalCombustionEngine {
+	protected $requiresPushing;
+
+	public function getRequiresPushing() :bool {
+		return($this->requiresPushing);
+	}
+
+	public function setRequiresPushing(bool $newRequiresPushing) :void {
+		$this->requiresPushing = $newRequiresPushing;
+	}
+
+	public function run() :void {
+		if($this->requiresPushing === true) {
+			echo "Hi Marlon" . PHP_EOL;
+		} else {
+			echo "Chugga Lugga" . PHP_EOL;
+		}
+	}
+}
+/*
  * Child class that extends the parent class: Vehicle
  */
 class Mazda extends Vehicle {
+	/*
+	 * Uses the methods and state variable defined inside the InternalCombustionEngine Trait
+	 */
+	use InternalCombustionEngine;
+
 	protected $model;
 /*
  * uses the constructor from the parent class to obtain the $licensePlateNo state variable
@@ -42,3 +70,4 @@ class Mazda extends Vehicle {
 		$this->model = $newModel;
 	}
 }
+
